@@ -131,9 +131,37 @@ divO macro n1, n2  ; n1,n2 values passed
     divO endm
     
 ;YOUSSEF
-main proc  
-moasdasdasdsadasdasdsadasas
+main proc
 
+mov ax,data
+mov ds,ax
+
+repeat:
+ printM enterMsg 
+ mov cx ,6
+ mov di,0
+readLoop:
+ printM num
+ printC n[di]
+ printM space
+
+call read
+call checkN
+
+cmp flag,0
+je cont
+printM errorNum
+jmp readLoop
+
+cont:
+mov dl,input
+mov nums[di],dl
+
+inc di
+loop readLoop
+
+main endp
+jmp toEnd
 
 ;ARSANI
 read proc      
