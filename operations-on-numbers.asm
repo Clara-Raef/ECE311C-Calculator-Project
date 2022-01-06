@@ -130,62 +130,6 @@ divO macro n1, n2  ; n1,n2 values passed
     popa ; load latest status
     divO endm
     
-    
-;YOUSSEF
-
-;root function
-;result = value^0.5
-root macro value
-pusha
-popf
-
-mov dl,value
-mov value,0
-mov regShift,00001000b ;it keeps right sgifting
-mov reg,00001000b ; it keeps track of all steps
-mov save,0
-mov cx,4
-lop1:
-push cx
-
-mulO reg,reg
-cmp result,dl
-ja leave
-
-mov bl,reg
-or value,bl
-
-mov bl,value
-or save,bl
-
-shr regShift,1
-
-mov bl ,regShift
-or reg,bl
-
-jmp finish
-
-leave:
-
-shr regShift,1
-mov bl,save
-mov reg, bl
-
-mov bl,regShift
-or reg,bl
-
-finish: 
-pop cx
-loop lop1
-
-mov dl, value
-mov result,dl
-
-popf
-popa
-root endm
-
-
 ;YOUSSEF
 main proc  
 moasdasdasdsadasdasdsadasas
