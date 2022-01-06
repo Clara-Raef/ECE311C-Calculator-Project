@@ -62,9 +62,7 @@ reg db ?
 regShift db ?
 save db ?
 
-
-
-.code   ;the executable part of the program
+.code 
 
 ;MINA
 printC macro character
@@ -441,7 +439,6 @@ pusha
   ret
   SelectOperation endp
 
-;MARK
 StandardOperation proc           
 
  pusha
@@ -466,7 +463,6 @@ StandardOperation proc
  mov bl,dl
  
  jmp toPower
- 
 
  aOp:
  
@@ -478,19 +474,16 @@ StandardOperation proc
  mov bl,al
  
  toPower: 
- 
 
  mulO bl,bl
  mov bl,result
  add standard,bl
- 
  
  inc si
  loop rootSum
  
  mov bh,standard
  mov bl,6  
- 
  
  divO bh,bl   
  
@@ -501,17 +494,10 @@ StandardOperation proc
  add bl,30h
  mov standard,bl
  
- 
- 
- 
  popf
  popa
  ret
  StandardOperation endp
-
-
- 
-
 
 avgOperation proc
  pusha
