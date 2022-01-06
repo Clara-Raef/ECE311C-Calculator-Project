@@ -64,7 +64,6 @@ save db ?
 
 .code 
 
-;MINA
 printC macro character
 pusha
     pushf 
@@ -79,7 +78,6 @@ pusha
     printC endm
 
 
-;MINA
 printM macro string
     pusha
     pushf 
@@ -95,8 +93,6 @@ printM macro string
     printM endm
 
 
-
-;Youssef(multiple function)
 ; result = n1*n2
 
 mulO macro n1,n2
@@ -127,7 +123,6 @@ divO macro n1, n2  ; n1,n2 values passed
     popa ; load latest status
     divO endm
     
-;YOUSSEF
 main proc
 
 mov ax,data
@@ -157,7 +152,6 @@ mov nums[di],dl
 inc di
 loop readLoop
 
-
 printM tyMsg
 call avgOperation
 call sort
@@ -183,13 +177,9 @@ inc cx
 loop SelectLoops
 
 
-
-
-
 main endp
 jmp toEnd
 
-;ARSANI
 read proc      
     pusha
     pushf ; to save current status
@@ -201,7 +191,6 @@ read proc
     ret
     read endp 
 
-;MARK
 checkN proc
  pusha
  pushf 
