@@ -11,7 +11,7 @@ space db 3Ah,09h,'$'
 tyMsg db 10,13,10,13,"thank you for entering all numbers ",03h,10,13,'$'
 finishMsg db 10,13,10,13,"thank you for use my project ",03h,10,13,'$'
 
-;Options msg
+;Options msgg
 selectMsg db 10,13,10,13,"Please select the operation you need",10,13,"<v,x,n,,d,a,e,s,l,q,r or ? for help> ",10h,'$'
 optionsMsg db                  10,13,
            db                  "v: for average",10,13,
