@@ -2,7 +2,7 @@
 ## "Operations on an Array of Numbers" Project
 
 #### Team Members
-- [Arsanios Isaac Helmy](https://github.com/arsaniisaac)
+- [ArsanioUs Isaac Helmy](https://github.com/arsanious-isaac)
 - [Clara Raef Nasry](https://github.com/Clara-Raef)
 - [Mark Magdy Amin](https://github.com/markmagdy822000)
 - [Mina Nagy Latif](https://github.com/MinaNagyLatif)
