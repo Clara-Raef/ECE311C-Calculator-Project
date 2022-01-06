@@ -18,7 +18,3 @@ The functions performed by this code are as follows: calculating the summation, 
 ### References
 1. Irvine, K. R., & Irvine, K. R. (2011). Assembly language for x86 processors. Upper Saddle River: Prentice Hall.
 2. Brey, Barry B.. (1997). The intel microprocessors 8086/8088, 80186/80188, 80286,80386, 80486, pentium , and pentium pro processor architecture, programming, and interfacing (4th ed). New Jersey: Prentice Hall Inc.
-
-
-
-
