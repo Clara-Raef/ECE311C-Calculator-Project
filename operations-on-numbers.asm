@@ -160,6 +160,35 @@ mov nums[di],dl
 inc di
 loop readLoop
 
+
+printM tyMsg
+call avgOperation
+call sort
+
+mov cx,1
+
+selectLoops:
+
+printM selectMsg
+call read
+call checkC
+
+cmp flag,0
+je continue
+
+printM errorChar
+jmp selectLoops
+
+continue:
+
+call selectOperation
+inc cx
+loop SelectLoops
+
+
+
+
+
 main endp
 jmp toEnd
 
