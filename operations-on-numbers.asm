@@ -1,7 +1,6 @@
 .model small
 
-;MINA
-.data   ;define variables
+.data  
 ;Numbers msg
 enterMsg db 10,13,10,13,"Enter 6 numbers <between 0 and 9> ",10,13,"then perform some arithmetic operations on them ",10h,10,13,'$'
 
