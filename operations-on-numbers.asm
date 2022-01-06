@@ -108,7 +108,6 @@ popf
 popa
 mulO endm
 
-;arsani
 ;result = n1 / n2
 divO macro n1, n2  ; n1,n2 values passed
     pusha
@@ -216,7 +215,6 @@ ret
 checkN endp 
 
 
-;MARK
 checkC proc
     pusha
     pushf 
@@ -268,7 +266,6 @@ checkC proc
     checkC endp
 
 
-;CLARA
 clear proc    
     
 mov ax, 0     
@@ -284,7 +281,6 @@ mov flag, 0
     clear endp
 
 
-;ARSANI
 SelectOperation proc
 pusha
  pushf
