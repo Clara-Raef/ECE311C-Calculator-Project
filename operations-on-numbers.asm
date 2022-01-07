@@ -379,13 +379,12 @@ pushf
     printM sumMsg
     
     mov ax, 0
-    mov al, sum
+    mov al, sum       ; al = sum
     
-    aam
-    or ax,3030h
-    
-    printC ah
-    printC al
+    aam               ; BCD ( binary to decimal ) adjust   ..  if al = 19 ascii (12h) then ax will be equal to 0109h
+    or ax,3030h       ; ( 0109 or 3030 ) = ( 3139 )
+    printC ah         ; print ( ah = 31 )
+    printC al         ; print ( ah = 39 )
     
     jmp finishSelect
     
