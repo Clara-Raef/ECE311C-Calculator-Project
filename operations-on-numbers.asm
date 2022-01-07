@@ -61,11 +61,6 @@ input db ? ;for reading from user
 result db ? ;for saving the result of mul or div or square
 flag db ? ;its value <0:false,1:true>
 
-;registers for the square root
-reg db ?
-regShift db ?
-save db ?
-
 .code 
 
 printC macro character
