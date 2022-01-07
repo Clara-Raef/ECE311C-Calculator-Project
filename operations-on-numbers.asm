@@ -1,60 +1,64 @@
 .model small
+.stack 1000h
+.data
 
-.data  
 ;Numbers msg
-enterMsg db 10,13,10,13,"Enter 6 numbers <between 0 and 9> ",10,13,"then perform some arithmetic operations on them ",10h,10,13,'$'
+
+enterMsg db 10,13,10,13,"Enter 6 numbers <between 0 and 9> ",10,13,"then choose an operations to be performed on them ",10h,10,13,'$'
 
 num db 10,13,"Enter the number $"
 n   db '1','2','3','4','5','6','$'
 space db 3Ah,09h,'$'
-tyMsg db 10,13,10,13,"thank you for entering all numbers ",03h,10,13,'$'
-finishMsg db 10,13,10,13,"thank you for use my project ",03h,10,13,'$'
+
+tyMsg db 10,13,10,13,"Thank you for entering all the numbers ",03h,10,13,'$'
+finishMsg db 10,13,10,13,"Thank you for using this program ",03h,10,13,'$'
 
 ;Options msg
 selectMsg db 10,13,10,13,"Please select the operation you need",10,13,"<v,x,n,,d,a,e,s,l,q,r or ? for help> ",10h,'$'
 optionsMsg db                  10,13,
            db                  "v: for average",10,13,
-           db                  "x: for max",10,13,
-           db                  "n: for min",10,13,
+           db                  "x: for maximum number",10,13,
+           db                  "n: for minimum number",10,13,
            db                  "e: for standard deviation",10,13,
            db                  "a: to show numbers in ascending order",10,13,
            db                  "d: to show numbers in descending order",10,13,
            db                  "s: summation of all numbers",10,13,
            db                  "l: for all the above",10,13,
            db                  "q: to quit",10,13,
-           db                  "r: to enter 6 new numbers",10,13
+           db                  "r: to enter 6 new digits",10,13
            db                  "?: for help",10,13,'$'
            
 ;Error msg
 errorChar db 10,13,10,13,"Unrecognized character",10,13,'$'
 errorNum db 10,13,10,13 ,"The character you entered is not in the range from 0 to 9",10,13,'$'
-;Operations msg
 
+;Operations msg
 sumMsg db 10,13,"The sum of all numbers is :$"
 avgMsg db 10,13,"The average is : $"
-maxMsg db 10,13,"the max number is : $"
-minMsg db 10,13,"The min number is : $"
-sdMsg db 10,13,"the standard deviation is : $"
+maxMsg db 10,13,"the maximum number is : $"
+minMsg db 10,13,"The minimum number is : $"
+sdMsg db 10,13,"The standard deviation is : $"
 ascMsg db 10,13,"Numbers in ascending order : $"
-desMsg db 10,13,"Number in descending order : $"
+desMsg db 10,13,"Numbers in descending order : $"
 
 allMsg db 's','v','x','n','e','a','d'
 
-;variables
-
-nums db  6 DUP <0>
-asc db  6 DUP <0>
-des db  6 DUP <0>  
-
+;Variables
 nums  db 0, 0, 0, 0, 0, 0
+
+avg db  0
+max db  0
+min db  0
+sum db  0
+standard db  0
+
 asc  db 0, 0, 0, 0, 0, 0
 des  db 0, 0, 0, 0, 0, 0
 
 ;Selection register
-
-compareReg db ?  ;for compare between the operations
-input db ? ;for read from user
-result db ? ;for save the result of mul or div or square
+compareReg db ?  ;for comparing between the operations
+input db ? ;for reading from user
+result db ? ;for saving the result of mul or div or square
 flag db ? ;its value <0:false,1:true>
 
 ;registers for the square root
@@ -65,23 +69,20 @@ save db ?
 .code 
 
 printC macro character
-pusha
+    pusha
     pushf 
     
     mov dl, character  
     mov ah, 2h
     int 21h
     
-    
     popf
     popa 
     printC endm
 
-
 printM macro string
     pusha
     pushf 
-    
     
     lea dx, string
     mov ah, 09h
@@ -93,34 +94,62 @@ printM macro string
     printM endm
 
 
-; result = n1*n2
-
+;result = n1 * n2 = n2 *n1
 mulO macro n1,n2
-pusha
-pushf
+     pusha
+     pushf
 
-mov ax,0;
-mov al,n1
-mul n2   ; the value is stored in AX register
-mov result,al
 
-popf
-popa
-mulO endm
+     mov ax,0;
+     mov al,n1
+     mul n2 
+     mov result,al
+
+
+     popf
+     popa
+     mulO endm
 
 ;result = n1 / n2
-divO macro n1, n2  ; n1,n2 values passed
+divO macro n1, n2 
     pusha
-    pushf ; save current status
+    pushf
     
-    mov ax,0 ; initialize ax = 0 (ah = 0, al = 0)
-    mov al, n1 ; move n1 to al
-    div n2  ; divide n1 / al(n2) and save in al
-    mov result, al ; move result from al to 'result' variable
+    mov ax,0 
+    mov al, n1 
+    div n2  
+    mov result, al 
     
     popf
-    popa ; load latest status
+    popa 
     divO endm
+
+
+  ;Square root operation
+  ;Result = value ^0.5
+   root macro value
+    pusha
+    pushf
+              
+    mov al, value 
+
+    mov cl, 0
+    mov bl, 0ffH
+   
+  n1: add bl, 02
+        cmp al, bl
+        jc here
+        inc cl
+        sub  al, bl
+        jnz n1
+        
+   here: mov result , cl
+        
+     popf
+     popa
+     
+     root endm
+    
     
 main proc
 
