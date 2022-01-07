@@ -157,16 +157,19 @@ mov ax,data
 mov ds,ax
 
 repeat:
+ call clear
+
  printM enterMsg 
  mov cx ,6
  mov di,0
-readLoop:
+ readLoop:
+ 
  printM num
  printC n[di]
  printM space
 
-call read
-call checkN
+call read ;input
+call checkN ;0--9
 
 cmp flag,0
 je cont
@@ -183,6 +186,7 @@ loop readLoop
 printM tyMsg
 call avgOperation
 call sort
+call StandardOperation
 
 mov cx,1
 
@@ -205,17 +209,17 @@ inc cx
 loop SelectLoops
 
 
-main endp
+    main endp
 jmp toEnd
 
 read proc      
     pusha
-    pushf ; to save current status
+    pushf 
     mov ah,1h
-    int 21h ; ask user to enter a number
-    mov input, al  ; move the entered number from al to 'input' variable     
+    int 21h 
+    mov input, al   
     popf
-    popa ; reload latest status
+    popa 
     ret
     read endp 
 
@@ -243,7 +247,7 @@ checkN proc
 ret
 checkN endp 
 
-
+;<v,x,n,,d,a,e,s,l,q,r or ? for help>
 checkC proc
     pusha
     pushf 
@@ -312,7 +316,7 @@ mov flag, 0
 
 SelectOperation proc
 pusha
- pushf
+pushf
  
     mov dl, input
     mov compareReg,dl
@@ -446,7 +450,8 @@ pusha
     pop cx
     inc di
     loop printAll
-    
+   
+   
  finishSelect:
  popf
  popa
@@ -454,7 +459,6 @@ pusha
   SelectOperation endp
 
 StandardOperation proc           
-
  pusha
  pushf
  
@@ -510,7 +514,7 @@ StandardOperation proc
  
  popf
  popa
- ret
+ret
  StandardOperation endp
 
 avgOperation proc
